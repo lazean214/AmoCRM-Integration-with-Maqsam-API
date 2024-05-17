@@ -94,7 +94,6 @@ class AmoCrmController extends Controller
            
             $entity_id = $response[0]['id'];
             
-            // dd($entity_id);
             //Add notes
             $note = [
                 [
@@ -129,7 +128,7 @@ class AmoCrmController extends Controller
                         "uniq" => $agent[0]->identifier,
                         "duration" => $call['duration'],
                         "source" => "Maqsam",
-                        "link" => "https://amo.naicatech.com/storage/mp3/recording_1715587689.mp3",
+                        "link" => "link to the saved file",
                         "phone" => $call['calleeNumber']
                     ]
                 ]
@@ -164,7 +163,7 @@ class AmoCrmController extends Controller
 
     public function genToken($code){
         $regenToken = Credentials::where('id', 1)->first();
-        $subdomain = 'ehproperties'; // Replace 'test' with your actual subdomain
+        $subdomain = 'test'; // Replace 'test' with your actual subdomain
         $link = 'https://' . $subdomain . '.amocrm.ru/oauth2/access_token';
 
         // Data for the request
@@ -187,11 +186,11 @@ class AmoCrmController extends Controller
 
             $responseData = $response->json();
             // Process $responseData as needed
-            $access_token = $response['access_token']; //Access токен
-            $refresh_token = $response['refresh_token']; //Refresh токен
-            $token_type = $response['token_type']; //Тип токена
-            $expires_in = $response['expires_in']; //Через сколько действие токена истекает
-
+            $access_token = $response['access_token']; 
+            $refresh_token = $response['refresh_token']; 
+            $token_type = $response['token_type']; 
+            $expires_in = $response['expires_in']; 
+            
             $records = Credentials::find(1);
 
             $records->access_token = $access_token;
@@ -220,7 +219,7 @@ class AmoCrmController extends Controller
         $regenToken = Credentials::where('id', 1)->first();
 
         // dd($regenToken);
-        $subdomain = 'ehproperties'; // Replace 'test' with your actual subdomain
+        $subdomain = 'test'; // Replace 'test' with your actual subdomain
         $link = 'https://' . $subdomain . '.amocrm.ru/oauth2/access_token';
 
         // Data for the request
@@ -271,13 +270,11 @@ class AmoCrmController extends Controller
 
     public function createLead(Request $request, $data)
     {
-        $subdomain = 'ehproperties'; // Replace 'test' with your actual subdomain
+        $subdomain = 'test'; // Replace 'test' with your actual subdomain
         $link = 'https://' . $subdomain . '.amocrm.ru/api/v4/leads/complex';
 
-        // Replace 'xxxx' with your actual access token
         $access_token = session('access_toke');
         $refreshToken = session('refresh_token');
-        // dd(session('refresh_token'));
 
         try {
             $response = Http::withHeaders([
@@ -317,10 +314,8 @@ class AmoCrmController extends Controller
         $subdomain = 'ehproperties'; // Replace 'test' with your actual subdomain
         $link = 'https://' . $subdomain . '.amocrm.ru/api/v4/leads/notes';
 
-        // Replace 'xxxx' with your actual access token
         $access_token = session('access_toke');
         $refreshToken = session('refresh_token');
-        // dd(session('refresh_token'));
 
         try {
             $response = Http::withHeaders([
@@ -398,14 +393,12 @@ class AmoCrmController extends Controller
 
         public function getOthers()
         {
-            $endpoint = 'leads/29173631';
-            $subdomain = 'ehproperties'; // Replace 'test' with your actual subdomain
+            $endpoint = 'leads/29173631'; //Example endpoint
+            $subdomain = 'test'; // Replace 'test' with your actual subdomain
             $link = 'https://' . $subdomain . '.amocrm.ru/api/v4/' .$endpoint;
 
-            // Replace 'xxxx' with your actual access token
             $access_token = session('access_toke');
             $refreshToken = session('refresh_token');
-            // dd(session('refresh_token'));
 
             try {
                 $response = Http::withHeaders([
