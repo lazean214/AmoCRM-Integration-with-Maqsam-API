@@ -8,4 +8,4 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Whats Included
 
-I included the dirty code for my trial and error so that you will have an idea how did i comeup with the final code.
+I included the dirty code for my trial and error so that you will have an idea how did i come up with the final code.
