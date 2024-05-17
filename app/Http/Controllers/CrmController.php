@@ -12,8 +12,8 @@ class CrmController extends Controller
 {
     private string $accessToken;
     private string $refreshToken;
-    private string $leadUrl = "https://ehproperties.amocrm.ru/api/v4/leads/complex";
-    private string $notesUrl = "https://ehproperties.amocrm.ru/api/v4/leads/notes";
+    private string $leadUrl = "https://subdomain.amocrm.ru/api/v4/leads/complex";
+    private string $notesUrl = "https://subdomain.amocrm.ru/api/v4/leads/notes";
     private string $endpoint;
     private array $pushData;
     public function __construct($data, $type) {
@@ -52,16 +52,16 @@ class CrmController extends Controller
     {
         $regenToken = Credentials::where('id', 1)->first();
 
-        $subdomain = 'ehproperties'; // Replace 'test' with your actual subdomain
+        $subdomain = 'test'; // Replace 'test' with your actual subdomain
         $link = 'https://' . $subdomain . '.amocrm.ru/oauth2/access_token';
 
         // Data for the request
         $data = [
-            'client_id' => $regenToken->client_id, // Replace with your client ID
-            'client_secret' => $regenToken->client_secret, // Replace with your client secret
+            'client_id' => $regenToken->client_id,
+            'client_secret' => $regenToken->client_secret,
             'grant_type' => 'refresh_token',
-            'refresh_token' => $regenToken->refresh_token, // Replace with the authorization code
-            'redirect_uri' => env('AMO_CLIENT_REDIRECT_URI'), // Replace with your redirect URI
+            'refresh_token' => $regenToken->refresh_token, 
+            'redirect_uri' => env('AMO_CLIENT_REDIRECT_URI'), 
         ];
 
         try {
